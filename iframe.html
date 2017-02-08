@@ -1,7 +1,7 @@
 <html>
 <body>
     
-<iframe id="myframe" sandbox="allow-scripts allow-forms" style="width: 500px; height: 400px;" src="https://www.html5rocks.com/en/tutorials/security/sandboxed-iframes/">
+<iframe id="myframe" sandbox="allow-scripts allow-forms" style="width: 500px; height: 400px;" src="about:blank">
 </iframe>
 <br><br><br>
 <textarea id="my-text-area">
@@ -21,7 +21,7 @@ function next() {
         urlsList.urls = textArea.value.split("\n"); 
     }
     
-    if (urlsList.length==0) return;
+    if (urlsList.urls.length==0) return;
     
     urlsList.myframe.src = urlsList.urls[urlsList.current];
     
