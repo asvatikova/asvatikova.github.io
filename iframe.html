@@ -3,6 +3,34 @@
     
 <iframe id="myframe" sandbox="allow-scripts allow-forms" style="width: 500px; height: 400px;" src="https://www.html5rocks.com/en/tutorials/security/sandboxed-iframes/">
 </iframe>
+<br><br><br>
+<textarea id="my-text-area">
+</textarea>
+<input type="submit" value="Next" onclick="next()">
+
+<script>
+function next() {
+    
+    if (!urlsList) {
+        urlsList = {};
+        
+        urlsList.myframe = document.getElementById("myframe");
+        urlsList.current = 0;
+        
+        var textArea = document.getElementById("my-text-area"); 
+        urlsList.urls = textArea.value.split("\n"); 
+    }
+    
+    if (urlsList.length==0) return;
+    
+    urlsList.myframe.src = urlsList.urls[urlsList.current];
+    
+    urlsList.current++;
+    
+    if (urlsList.current >= urlsList.urls.length)
+        urlsList.current = 0;
+}
+</script>
     
 </body>
 </html>
