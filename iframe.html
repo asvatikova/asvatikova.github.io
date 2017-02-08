@@ -12,24 +12,24 @@
 <script>
 function next() {
     
-    if (!urlsList) {
-        urlsList = {};
+    if (!window.urls) {
+        window.urls = {};
         
-        urlsList.myframe = document.getElementById("myframe");
-        urlsList.current = 0;
+        window.urls.myframe = document.getElementById("myframe");
+        window.urls.i = 0;
         
         var textArea = document.getElementById("my-text-area"); 
-        urlsList.urls = textArea.value.split("\n"); 
+        window.urls.items = textArea.value.split("\n"); 
     }
     
-    if (urlsList.urls.length==0) return;
+    if (window.urls.items.length==0) return;
     
-    urlsList.myframe.src = urlsList.urls[urlsList.current];
+    window.urls.myframe.src = window.urls.items[urls.i];
     
-    urlsList.current++;
+    window.urls.i++;
     
-    if (urlsList.current >= urlsList.urls.length)
-        urlsList.current = 0;
+    if (window.urls.i >= window.urls.items.length)
+        window.urls.i = 0;
 }
 </script>
     
