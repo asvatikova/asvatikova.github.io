@@ -164,6 +164,22 @@ MapChart.prototype.draw = function (date, network, hardware) {
         title: {
             text: ''
         },
+        legend: {
+            title: {
+                text: 'NT7, ms',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            },
+            align: 'left',
+            verticalAlign: 'bottom',
+            // floating: true,
+            // layout: 'vertical',
+            valueDecimals: 0,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(255, 255, 255, 0.85)',
+            symbolRadius: 0,
+            symbolHeight: 14
+        },
         mapNavigation: {
             enabled: true,
             buttonOptions: {
@@ -172,33 +188,54 @@ MapChart.prototype.draw = function (date, network, hardware) {
         },
 
         colorAxis: {
-            type: 'logarithmic',
-            // min: this.currentChartData.min,
-            // max: this.currentChartData.max,
-            minColor: '#ffff00',
-            maxColor: '#ff0000'
+            dataClasses: [{
+                color: 'rgba(0,125,0,1)',
+                to: 1000
+            }, {
+                color: 'rgba(0,125,0,0.75)',
+                from: 1000,
+                to: 2000
+            }, {
+                color: 'rgba(0,125,0,0.5)',
+                from: 2000,
+                to: 3000
+            }, {
+                color: 'rgba(255,235,0,1)',
+                from: 3000,
+                to: 4000
+            }, {
+                color: 'rgba(255,235,0,1)',
+                from: 4000,
+                to: 5000
+            }, {
+                color: 'rgba(255,235,0,0.75)',
+                from: 5000,
+                to: 6000
+            }, {
+                color: 'rgba(255,138,15,0.5)',
+                from: 6000,
+                to: 7000
+            }, {
+                color: 'rgba(255,138,15,0.75)',
+                from: 7000,
+                to: 8000
+            }, {
+                color: 'rgba(200,0,0,0.5)',
+                from: 8000,
+                to: 9000
+            }, {
+                color: 'rgba(200,0,0,0.75)',
+                from: 9000,
+                to: 10000
+            }, {
+                color: 'rgba(200,0,0,1)',
+                from: 10000
+            } ]
 
 
         },
 
         series: [
-            // {
-            //     name: 'Countries',
-            //     color: '#E0E0E0',
-            //     enableMouseTracking: false
-            // },
-            // {
-            //     type: 'mapbubble',
-            //     name: 'Population 2013',
-            //     data: testdata,
-            //     minSize: 40,
-            //     maxSize: '100%',
-            //     tooltip: {
-            //         pointFormat: '{point.code}: {point.z} thousands'
-            //     }
-            // }
-            // ,
-
             {
                 data: this.currentChartData.series,
                 name: 'Random data',
@@ -207,11 +244,6 @@ MapChart.prototype.draw = function (date, network, hardware) {
                         color: '#f96400'
                     }
                 }
-                //,
-                // dataLabels: {
-                //     enabled: true,
-                //     format: '{point.name} ms'
-                // }
             }
         ]
     });
