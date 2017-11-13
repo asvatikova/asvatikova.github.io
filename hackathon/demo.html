@@ -18,17 +18,20 @@
         <td width="200 px" valign="top">
             <label id="dateSlider-label" for="dateSlider"></label><br><br><br>
 
-            <input type="range" list="tickmarks" min="0" max="3" step="1" id="clusterSlider">
+            <input type="range" list="tickmarks" min="0" max="7" step="1" id="clusterSlider">
 
             <datalist id="tickmarks">
                 <option value="0">
                 <option value="1">
-                <option value="1">
                 <option value="2">
                 <option value="3">
+                <option value="4">
+                <option value="5">
+                <option value="6">
+                <option value="7">
             </datalist>
 
-            <div id="dataSlider-label">
+            <div id="clusterSlider-label">
                 Network: <label id="clusterSlider-label-network">2</label><br>
                 Hardware: <label id="clusterSlider-label-hardware">2</label><br>
                 Browser: <label id="clusterSlider-label-ua">Chrome</label><br>
@@ -40,7 +43,7 @@
     </tr>
 </table>
 <script>
-var mapChart = new MapChart('hackathone_second_metric_3_2', 'mapChart');
+var mapChart = new MapChart('cool_data', 'mapChart');
 var clusterSlider;
 var dateSlider = new DateSlider('dateSlider');
 clusterSlider = new ClusterSlider('clusterSlider');
