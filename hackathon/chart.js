@@ -95,7 +95,8 @@ var MAXMIND_TO_MAP = {
 function MapChart(filename, divId) {
     this.divId = divId;
     this.map = null;
-    this.currentChartData = {};
+    this.currentChartData = [];
+    this.currentBubblesData = [];
     this.chartData = [];
 
     var self = this;
@@ -135,23 +136,32 @@ function MapChart(filename, divId) {
 
 MapChart.prototype.filter = function(date, network, hardware) {
     var res = [];
-    var min = 999999999999, max = 0;
+    var bubbles = [];
     var i = 0;
 
     for (var el in this.chartData) {
         var element = this.chartData[el];
         if (element.network === network && element.hardware === hardware && element.date === date) {
-            res[i] = [element.region, element.metric1];
-            if (element.metric1 > max) max = element.metric1;
-            if (element.metric1 < min) min = element.metric1;
+            // res[i] = [element.region, element.metric1];
+            res[i] = {
+                "hc-key": element.region,
+                "value": element.metric1
+            };
+            bubbles[i] = {
+                "hc-key": element.region,
+                "z": element.size
+            };
             i++;
         }
     }
-    this.currentChartData.series = res;
-    this.currentChartData.min = min;
-    this.currentChartData.max = max;
-    console.log(this.currentChartData.series);
-    return this.currentChartData.series;
+
+    // var sum = bubbles.reduce(function(s, c) { return s + c.size; });
+    //
+    // if (sum > 0)
+    //     bubbles.forEach(function (item) { item.z = item.z * 10 / sum });
+
+    this.currentChartData = res;
+    this.currentBubblesData = bubbles;
 };
 
 MapChart.prototype.draw = function (date, network, hardware) {
@@ -220,15 +230,15 @@ MapChart.prototype.draw = function (date, network, hardware) {
                 from: 7000,
                 to: 8000
             }, {
-                color: 'rgba(200,0,0,0.5)',
+                color: 'rgba(255,0,0,0.5)',
                 from: 8000,
                 to: 9000
             }, {
-                color: 'rgba(200,0,0,0.75)',
+                color: 'rgba(255,0,0,0.75)',
                 from: 9000,
                 to: 10000
             }, {
-                color: 'rgba(200,0,0,1)',
+                color: 'rgba(255,0,0,1)',
                 from: 10000
             } ]
 
@@ -237,13 +247,25 @@ MapChart.prototype.draw = function (date, network, hardware) {
 
         series: [
             {
-                data: this.currentChartData.series,
-                name: 'Random data',
+                data: this.currentChartData,
+                // mapData: Highcharts.maps['countries/ru/custom/ru-all-disputed'],
+                name: 'NT7',
+                // allowPointSelect: true,
+                joinBy: 'hc-key',
                 states: {
                     hover: {
                         color: '#f96400'
                     }
                 }
+            }
+            , {
+                name: 'Count',
+                type: 'mapbubble',
+                minSize: 4,
+                maxSize: 10,
+                joinBy: 'hc-key',
+                data: this.currentBubblesData
+
             }
         ]
     });
@@ -251,6 +273,8 @@ MapChart.prototype.draw = function (date, network, hardware) {
 
 MapChart.prototype.redraw = function (date, network, hardware) {
     if (this.map) {
-        this.map.series[0].setData(this.filter(date, network, hardware));
+        this.filter(date, network, hardware);
+        this.map.series[0].setData(this.currentChartData);
+        this.map.series[1].setData(this.currentBubblesData);
     }
 };
