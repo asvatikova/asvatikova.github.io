@@ -1,0 +1,69 @@
+<html>
+<head>
+    <script src="http://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/mapdata/countries/ru/custom/ru-all-disputed.js"></script>
+    <script src="chart.js"></script>
+    <script src="dateslider.js"></script>
+    <script src="clusterslider.js"></script>
+
+</head>
+<body>
+<table style="width: 100%">
+    <tr>
+        <td colspan="2">
+<input type="range" id="dateSlider" style="width: 100%">
+        </td>
+    </tr>
+    <tr>
+        <td width="200 px" valign="top">
+            <label id="dateSlider-label" for="dateSlider"></label><br><br><br>
+
+            <input type="range" list="tickmarks" min="0" max="3" step="1" id="clusterSlider">
+
+            <datalist id="tickmarks">
+                <option value="0">
+                <option value="1">
+                <option value="1">
+                <option value="2">
+                <option value="3">
+            </datalist>
+
+            <div id="dataSlider-label">
+                Network: <label id="clusterSlider-label-network">2</label><br>
+                Hardware: <label id="clusterSlider-label-hardware">2</label><br>
+                Browser: <label id="clusterSlider-label-ua">Chrome</label><br>
+            </div>
+        </td>
+        <td>
+            <div id="mapChart" style="width:100%; height:600px;">Loading file</div>
+        </td>
+    </tr>
+</table>
+<script>
+var mapChart = new MapChart('hackathone_second_metric_3_2', 'mapChart');
+var clusterSlider;
+var dateSlider = new DateSlider('dateSlider');
+clusterSlider = new ClusterSlider('clusterSlider');
+dateSlider.setCallback( function(date) {
+    var currentCluster = clusterSlider.getCurrentCluster();
+    mapChart.redraw(date, currentCluster.network, currentCluster.hardware);
+});
+clusterSlider.setCallback( function(network, hardware) {
+    mapChart.redraw(dateSlider.getCurrentDate(), network, hardware);
+});
+dateSlider.setDate(-500);
+
+
+var currentCluster = clusterSlider.getCurrentCluster();
+mapChart.draw(dateSlider.getCurrentDate(), currentCluster.network, currentCluster.hardware);
+
+//var timerId = setInterval(function() {
+//    if (!dateSlider.stepUp())
+//        clearInterval(timerId);
+//}, 200);
+
+
+
+</script>
+</body>
+</html>
