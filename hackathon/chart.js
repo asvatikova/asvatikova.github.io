@@ -196,6 +196,13 @@ MapChart.prototype.draw = function (date, network, hardware) {
         title: {
             text: ''
         },
+        mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+                verticalAlign: 'bottom'
+            }
+        },
+
         legend: {
             title: {
                 text: 'NT7, ms',
@@ -203,7 +210,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
                     color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
                 }
             },
-            align: 'left',
+            align: 'right',
             verticalAlign: 'bottom',
             // floating: true,
             // layout: 'vertical',
@@ -212,55 +219,51 @@ MapChart.prototype.draw = function (date, network, hardware) {
             symbolRadius: 0,
             symbolHeight: 14
         },
-        mapNavigation: {
-            enabled: true,
-            buttonOptions: {
-                verticalAlign: 'bottom'
-            }
-        },
+
+
 
         colorAxis: {
             dataClasses: [{
-                color: 'rgba(0,125,0,1)',
+                color: 'rgb(5,115,0)',
                 to: 1000
             }, {
-                color: 'rgba(0,125,0,0.75)',
+                color: 'rgb(50,155,0)',
                 from: 1000,
                 to: 2000
             }, {
-                color: 'rgba(0,125,0,0.5)',
+                color: 'rgb(112,170,0)',
                 from: 2000,
                 to: 3000
             }, {
-                color: 'rgba(255,235,0,1)',
+                color: 'rgb(162,187,0)',
                 from: 3000,
                 to: 4000
             }, {
-                color: 'rgba(255,235,0,1)',
+                color: 'rgb(187,194,0)',
                 from: 4000,
                 to: 5000
             }, {
-                color: 'rgba(255,235,0,0.75)',
+                color: 'rgb(255,221,0)',
                 from: 5000,
                 to: 6000
             }, {
-                color: 'rgba(255,138,15,0.5)',
+                color: 'rgb(255,196,0)',
                 from: 6000,
                 to: 7000
             }, {
-                color: 'rgba(255,138,15,0.75)',
+                color: 'rgb(255,170,0)',
                 from: 7000,
                 to: 8000
             }, {
-                color: 'rgba(255,0,0,0.5)',
+                color: 'rgb(255,140,0)',
                 from: 8000,
                 to: 9000
             }, {
-                color: 'rgba(255,0,0,0.75)',
+                color: 'rgb(255,100,0)',
                 from: 9000,
                 to: 10000
             }, {
-                color: 'rgba(255,0,0,1)',
+                color: 'rgb(255,50,0)',
                 from: 10000
             } ]
 
@@ -282,6 +285,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
             },
             {
                 name: 'Count',
+                showInLegend: false,
                 type: 'mapbubble',
                 minSize: 5,
                 maxSize: 5,
@@ -292,6 +296,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
             },
             {
                 name: 'Count',
+                showInLegend: false,
                 type: 'mapbubble',
                 minSize: 15,
                 maxSize: 15,
@@ -302,6 +307,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
             },
             {
                 name: 'Count',
+                showInLegend: false,
                 type: 'mapbubble',
                 minSize: 25,
                 maxSize: 25,
@@ -312,6 +318,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
             },
             {
                 name: 'Count',
+                showInLegend: false,
                 type: 'mapbubble',
                 minSize: 32,
                 maxSize: 32,
@@ -322,6 +329,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
             },
             {
                 name: 'Count',
+                showInLegend: false,
                 type: 'mapbubble',
                 minSize: 37,
                 maxSize: 37,
@@ -332,6 +340,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
             },
             {
                 name: 'Count',
+                showInLegend: false,
                 type: 'mapbubble',
                 minSize: 42,
                 maxSize: 42,
@@ -342,6 +351,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
             },
             {
                 name: 'Count',
+                showInLegend: false,
                 type: 'mapbubble',
                 minSize: 47,
                 maxSize: 47,
@@ -352,6 +362,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
             },
             {
                 name: 'Count',
+                showInLegend: false,
                 type: 'mapbubble',
                 minSize: 55,
                 maxSize: 55,
@@ -362,6 +373,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
             },
             {
                 name: 'Count',
+                showInLegend: false,
                 type: 'mapbubble',
                 minSize: 60,
                 maxSize: 60,
@@ -372,6 +384,7 @@ MapChart.prototype.draw = function (date, network, hardware) {
             },
             {
                 name: 'Count',
+                showInLegend: false,
                 type: 'mapbubble',
                 minSize: 65,
                 maxSize: 65,
