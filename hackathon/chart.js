@@ -136,8 +136,9 @@ function MapChart(filename, divId) {
 
 MapChart.prototype.filter = function(date, network, hardware) {
     var res = [];
-    var bubbles = [];
+    var bubbles = [[],[],[],[],[],[],[],[],[],[]];
     var i = 0;
+    var bi = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     for (var el in this.chartData) {
         var element = this.chartData[el];
@@ -147,18 +148,39 @@ MapChart.prototype.filter = function(date, network, hardware) {
                 "hc-key": element.region,
                 "value": element.metric1
             };
-            bubbles[i] = {
+            i++;
+
+            var bbl = {
                 "hc-key": element.region,
                 "z": element.size
             };
-            i++;
+
+            var bin = 0;
+            if (element.size < 10) {
+                bin = 0;
+            } else if (element.size < 100) {
+                bin = 1;
+            } else if (element.size < 500) {
+                bin = 2;
+            } else if (element.size < 1000) {
+                bin = 3;
+            } else if (element.size < 3000) {
+                bin = 4;
+            } else if (element.size < 5000) {
+                bin = 5;
+            } else if (element.size < 10000) {
+                bin = 6;
+            } else if (element.size < 20000) {
+                bin = 7;
+            } else if (element.size < 30000) {
+                bin = 8;
+            } else {
+                bin = 9;
+            }
+            bubbles[bin][bi[bin]] = bbl;
+            bi[bin]++;
         }
     }
-
-    // var sum = bubbles.reduce(function(s, c) { return s + c.size; });
-    //
-    // if (sum > 0)
-    //     bubbles.forEach(function (item) { item.z = item.z * 10 / sum });
 
     this.currentChartData = res;
     this.currentBubblesData = bubbles;
@@ -257,14 +279,105 @@ MapChart.prototype.draw = function (date, network, hardware) {
                         color: '#f96400'
                     }
                 }
-            }
-            , {
+            },
+            {
                 name: 'Count',
                 type: 'mapbubble',
-                minSize: 4,
-                maxSize: 10,
+                minSize: 5,
+                maxSize: 5,
+                color: 'rgba(255,255,255,0.5)',
                 joinBy: 'hc-key',
-                data: this.currentBubblesData
+                data: this.currentBubblesData[0]
+
+            },
+            {
+                name: 'Count',
+                type: 'mapbubble',
+                minSize: 15,
+                maxSize: 15,
+                color: 'rgba(255,255,255,0.5)',
+                joinBy: 'hc-key',
+                data: this.currentBubblesData[1]
+
+            },
+            {
+                name: 'Count',
+                type: 'mapbubble',
+                minSize: 25,
+                maxSize: 25,
+                color: 'rgba(255,255,255,0.5)',
+                joinBy: 'hc-key',
+                data: this.currentBubblesData[2]
+
+            },
+            {
+                name: 'Count',
+                type: 'mapbubble',
+                minSize: 32,
+                maxSize: 32,
+                color: 'rgba(255,255,255,0.5)',
+                joinBy: 'hc-key',
+                data: this.currentBubblesData[3]
+
+            },
+            {
+                name: 'Count',
+                type: 'mapbubble',
+                minSize: 37,
+                maxSize: 37,
+                color: 'rgba(255,255,255,0.5)',
+                joinBy: 'hc-key',
+                data: this.currentBubblesData[4]
+
+            },
+            {
+                name: 'Count',
+                type: 'mapbubble',
+                minSize: 42,
+                maxSize: 42,
+                color: 'rgba(255,255,255,0.5)',
+                joinBy: 'hc-key',
+                data: this.currentBubblesData[5]
+
+            },
+            {
+                name: 'Count',
+                type: 'mapbubble',
+                minSize: 47,
+                maxSize: 47,
+                color: 'rgba(255,255,255,0.5)',
+                joinBy: 'hc-key',
+                data: this.currentBubblesData[6]
+
+            },
+            {
+                name: 'Count',
+                type: 'mapbubble',
+                minSize: 55,
+                maxSize: 55,
+                color: 'rgba(255,255,255,0.5)',
+                joinBy: 'hc-key',
+                data: this.currentBubblesData[7]
+
+            },
+            {
+                name: 'Count',
+                type: 'mapbubble',
+                minSize: 60,
+                maxSize: 60,
+                color: 'rgba(255,255,255,0.5)',
+                joinBy: 'hc-key',
+                data: this.currentBubblesData[8]
+
+            },
+            {
+                name: 'Count',
+                type: 'mapbubble',
+                minSize: 65,
+                maxSize: 65,
+                color: 'rgba(255,255,255,0.5)',
+                joinBy: 'hc-key',
+                data: this.currentBubblesData[9]
 
             }
         ]
@@ -275,6 +388,9 @@ MapChart.prototype.redraw = function (date, network, hardware) {
     if (this.map) {
         this.filter(date, network, hardware);
         this.map.series[0].setData(this.currentChartData);
-        this.map.series[1].setData(this.currentBubblesData);
+
+        for (var i = 1; i < 11; i++) {
+            this.map.series[i].setData(this.currentBubblesData[i-1]);
+        }
     }
 };
