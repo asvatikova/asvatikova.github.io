@@ -6,7 +6,7 @@ function DateSlider(id){
     this.input.step = 1;
     this.input.value = -450;
 
-    this.today = new Date();
+    this.today = new Date(2017, 10, 13);
 
     var self = this;
     this.input.onchange = function() {

@@ -124,7 +124,7 @@ function MapChart(filename, divId) {
                             metric1: parseFloat(elements[7]),
                             //
                             //
-                            size: elements[8]
+                            size: parseInt(elements[8])
                         }
                     }
                 }
