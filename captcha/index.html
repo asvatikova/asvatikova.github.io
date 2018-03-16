@@ -19,8 +19,12 @@
     var element = document.getElementById('submit');
     element.onclick = validate;
   }
+
+  function onRecaptchaLoad() {
+    console.log("recaptcha loaded");
+  }
 </script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
 </head>
 <body>
 <form>
