@@ -22,6 +22,7 @@
 
   function onRecaptchaLoad() {
     console.log("recaptcha loaded");
+    grecaptcha.render();
   }
 </script>
     <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
