@@ -8,7 +8,7 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-    if (event.request.url.includes("getSavedUsers")) {
+    if (event.request.url.includes("test.ok.ru")) {
         console.log("Service worker request " + event.request.url);
         
         
