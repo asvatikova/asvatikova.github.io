@@ -2,8 +2,19 @@
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
 }
+
+console.log("Wait 5 sec")
+
+window.setTimeout( function() {
+    var head= document.getElementsByTagName('head')[0];
+       var script= document.createElement('script');
+       script.type= 'text/javascript';
+       script.src= 'https://test.ok.ru/web-api/v2/login/getSavedUsers';
+       head.appendChild(script);
+       
+       console.log("script added");
+       
+} ,5000);
+
 </script>
 
-
-
-<script src="https://test.ok.ru/web-api/v2/login/getSavedUsers" ></script>
