@@ -15,8 +15,8 @@ self.addEventListener('fetch', event => {
         event.respondWith(
                 fetch(event.request).then(function(response){
                     
-                    response.text().then(function(body){
-                            console.log('Service worker response\n', body); 
+                    response.json().then(function(data){
+                            console.log('Service worker response\n', data.stringify()); 
                    })
                     
                     
