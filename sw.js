@@ -14,7 +14,12 @@ self.addEventListener('fetch', event => {
         
         event.respondWith(
                 fetch(event.request).then(function(response){
-                    console.log('Service worker response\n', response);
+                    
+                    response.text().then(function(body){
+                            console.log('Service worker response\n', body); 
+                   })
+                    
+                    
                     return response;  
                 })
             );
