@@ -18,7 +18,7 @@ self.addEventListener('fetch', event => {
                     return response.text().then(function(body){
                             console.log('Service worker response\n', body); 
                             console.log('Service worker response status ', response.status); 
-                            return response;  
+                            return new Response("alet(1)", {status: response.status, statusText: response.statusText});  
                             
                     })
                     
