@@ -11,11 +11,12 @@ self.addEventListener('fetch', event => {
     if (event.request.url.includes("getSavedUsers")) {
         console.log("Service worker request " + event.request.url);
         
-    event.respondWith(
-        fetch(event.request).then(response => {
-                console.log("Service worker response\n" + response);  
-                return response;
-            });
-          );
+        
+        event.respondWith(
+                fetch(event.request).then(function(response){
+                    console.log('Service worker response\n', response);
+                    return response;  
+                })
+            );
       }
 });
